@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For My Dearest Bubs 💗</title>
+
+<style>
+* { box-sizing: border-box; font-family: 'Georgia', serif; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ffd1dc, #ffe6f0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Floating flowers */
+.flower {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  opacity: 0.4;
+  background:
+    radial-gradient(circle at center, #ff69b4 40%, transparent 41%),
+    radial-gradient(circle at top left, #ffb6c1 30%, transparent 31%),
+    radial-gradient(circle at top right, #ffb6c1 30%, transparent 31%),
+    radial-gradient(circle at bottom left, #ffb6c1 30%, transparent 31%),
+    radial-gradient(circle at bottom right, #ffb6c1 30%, transparent 31%);
+  border-radius: 50%;
+  animation: floatUp 20s linear infinite;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(120vh) rotate(0deg); }
+  to   { transform: translateY(-140vh) rotate(360deg); }
+}
+
+/* Floating hearts */
+.heart {
+  position: absolute;
+  color: rgba(255, 105, 180, 0.35);
+  font-size: 20px;
+  animation: heartFloat 18s linear infinite;
+}
+
+@keyframes heartFloat {
+  from { transform: translateY(120vh) scale(0.8); }
+  to   { transform: translateY(-140vh) scale(1.2); }
+}
+
+.container {
+  text-align: center;
+  z-index: 2;
+}
+
+/* Envelope */
+.envelope {
+  width: 300px;
+  height: 200px;
+  background: #ffc0cb;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+.envelope:hover { transform: scale(1.05); }
+
+.envelope::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #ffb6c1;
+  clip-path: polygon(0 0, 100% 0, 50% 60%);
+  border-radius: 10px 10px 0 0;
+}
+
+/* Letter */
+.letter {
+  width: 340px;
+  background: #fffafc;
+  border-radius: 14px;
+  margin: 30px auto 0;
+  padding: 25px 22px 30px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  opacity: 0;
+  transform: translateY(-20px);
+  max-height: 0;
+  overflow: hidden;
+  transition: all 1s ease;
+}
+
+.letter.open {
+  opacity: 1;
+  transform: translateY(0);
+  max-height: 1000px;
+}
+
+.letter h2 {
+  color: #d63384;
+  margin-top: 0;
+}
+
+/* Paragraph animation */
+.letter p {
+  opacity: 0;
+  animation: fadeUp 1s forwards;
+}
+
+.letter p:nth-of-type(1){ animation-delay: .3s; }
+.letter p:nth-of-type(2){ animation-delay: .8s; }
+.letter p:nth-of-type(3){ animation-delay: 1.3s; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Signature pulse */
+.signature {
+  margin-top: 15px;
+  font-style: italic;
+  color: #c2185b;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,100% { transform: scale(1); }
+  50%     { transform: scale(1.05); }
+}
+
+/* Buttons */
+.buttons {
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #ff69b4, #ff85c1);
+  color: white;
+  cursor: pointer;
+  transition: transform .2s ease;
+}
+
+button:hover {
+  transform: scale(1.1) rotate(-2deg);
+}
+
+/* Sparkles */
+.sparkle {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  pointer-events: none;
+  background: radial-gradient(circle, white 40%, transparent 60%);
+  animation: sparkle 1s ease-out forwards;
+}
+
+@keyframes sparkle {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(3); }
+}
+
+/* Final screen */
+.final {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #ffb6c1, #ffd1dc);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.final h1 {
+  font-size: 46px;
+  color: #c2185b;
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<script>
+/* Flowers */
+for (let i = 0; i < 25; i++) {
+  const f = document.createElement('div');
+  f.className = 'flower';
+  f.style.left = Math.random() * 100 + 'vw';
+  f.style.animationDuration = 15 + Math.random() * 10 + 's';
+  document.body.appendChild(f);
+}
+
+/* Hearts */
+for (let i = 0; i < 20; i++) {
+  const h = document.createElement('div');
+  h.className = 'heart';
+  h.innerHTML = '♥';
+  h.style.left = Math.random() * 100 + 'vw';
+  h.style.fontSize = 14 + Math.random() * 20 + 'px';
+  h.style.animationDuration = 14 + Math.random() * 10 + 's';
+  document.body.appendChild(h);
+}
+</script>
+
+<div class="container">
+  <div class="envelope" id="envelope"></div>
+
+  <div class="letter" id="letter">
+    <h2>To my bubs,</h2>
+
+    <p>To me, you are like a favorite song that I never want to stop playing. I feel our love growing deeper every single day, and I'm so grateful for how you make even our simplest moments feel beautiful.</p>
+
+    <p>They say that when life gives you tangerines, you should find someone to share them with—because the sweetest parts of life aren't meant to be enjoyed alone. Even when my difficulties in life hit me hard, I never forget how you uplift me day by day.</p>
+
+    <p>Thank you for being that person for me. Because of you, my life feels like spring every day.</p>
+
+    <div class="signature">
+      With utmost love,<br>your tobitoy & bubs 💗
+    </div>
+
+    <div class="buttons">
+      <button onclick="yesAction()">Yes</button>
+      <button onclick="yesAction()">Yes, bubs</button>
+    </div>
+  </div>
+</div>
+
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/audio/2023/02/28/audio_8b1a1bfc4b.mp3" type="audio/mpeg">
+</audio>
+
+<div class="final" id="final">
+  <h1>I love you, my bubs — today, tomorrow, always 💗</h1>
+</div>
+
+<script>
+const envelope = document.getElementById('envelope');
+const letter = document.getElementById('letter');
+const music = document.getElementById('music');
+const finalScreen = document.getElementById('final');
+
+envelope.addEventListener('click', () => {
+  letter.classList.add('open');
+  music.play();
+});
+
+function yesAction() {
+  finalScreen.style.display = 'flex';
+}
+
+document.addEventListener('click', e => {
+  const s = document.createElement('div');
+  s.className = 'sparkle';
+  s.style.left = e.clientX + 'px';
+  s.style.top = e.clientY + 'px';
+  document.body.appendChild(s);
+  setTimeout(() => s.remove(), 1000);
+});
+</script>
+
+</body>
+</html>
